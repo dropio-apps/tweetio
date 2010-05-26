@@ -32,7 +32,7 @@ module ApplicationHelper
 
   #get file id by encrypt id
   def get_file_id_by_encrypt_id(encrypt_id)    
-    @enc_id = UploadFile.find(:first,:select=>"id",:conditions=>["encrypt_id=?",encrypt_id])
+    @enc_id = UploadFile.find(:first,:select=>"id",:conditions=>["encrypt_id='#{encrypt_id}'"])
     if !@enc_id.nil?
       return @enc_id.id
     else
