@@ -1,8 +1,8 @@
 
 development:
   strategy: oauth
-  oauth_consumer_key: RxM3GDA9lQkioZNv3FRn5A
-  oauth_consumer_secret: SuQUL0YfiW8I1FEz62joaYMatElcUIfpxxu3vDbnlzE
+  oauth_consumer_key: 0KrcQWn63Tk6Io3owCGg
+  oauth_consumer_secret: pEBTMnHZbFhevNXSiVVXOycYB6oLQxXYcjWywyLLOg
   base_url: "https://twitter.com"
   authorize_path: "/oauth/authenticate"
   api_timeout: 10
