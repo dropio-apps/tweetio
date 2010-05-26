@@ -1,0 +1,38 @@
+<%= render :partial=>'common/header' %>
+
+<div class="home_middle">
+  <div class="home_middle_photo">
+    <div class="home_middle_photo1"><img src="/images/photo.png" /></div>
+  </div>
+  <div class="home_middle_subheading">
+    <h1>What is Tweet.io?</h1>
+    <h2>Tweet.io lets you share photos on <span class="home_subtext_twitter"><a href="http://twitter.com" target="_blank">Twitter</a></span></h2>
+    <h1>How do I use Tweet.io?</h1>
+    <h2>You can post pictures to Tweet.io from your phone, our <span class="home_subtext_twitter"><a href="http://api.twitter.com" target="_blank">API</a></span>, or through the site itself.</h2>
+    <h2>There are also popular twitter clients that have built-in support for Tweet.io.</h2>
+    <h1>How do I create an account?</h1>
+    <h2>If you have a Twitter account then you already have a Tweet.io account, just login to Tweet.io with your Twitter username and password and you are all set.
+    </h2>
+    <h2>If you don't have a Twitter account you can sign up for one for free at <span class="home_subtext_twitter"><a href="http://twitter.com" target="_blank">Twitter.com</a></span></h2>
+    <p>&nbsp;</p>
+  </div>
+  <div class="home_middle_recentsub_heading">
+    <div class="home_middle_recent_image"><img src="/images/recentmedia.png" /></div>
+    <div class="home_middle_recent_subimage">
+      <div class="home_middle_recent_subimage_left"></div>
+      <div class="home_middle_recent_subimage_middle">
+         <% if !@medias.empty? %>
+             <% i = 0  %>
+            <% @medias.each do |media|%>
+              <% if !@thumbnail[i].nil? %>
+                <%= link_to image_tag(@thumbnail[i],:border=>'0',:height=>"58px",:width=>"58px"),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%>
+              <% end %>
+              <% i = i+1  %>
+            <%end%>
+         <%end%>
+      </div>
+      <div class="home_middle_recent_subimage_right"></div>
+    </div>
+  </div>
+</div>
+<%= render :partial=>'common/footer' %>

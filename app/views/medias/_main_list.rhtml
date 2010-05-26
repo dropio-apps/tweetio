@@ -1,0 +1,61 @@
+<div class="detailpage1_middle">
+<div class="detailpage1_middle_subleft">    
+    <div class="user_thumb">
+      <p><%= image_tag @user_image %></p>
+      <h1><%=@user_name%></h1>
+      <br style="clear:both;">
+    </div>
+  <% if !@medias.empty? %>
+     <% i = 0  %>
+     <% for media in @medias %>
+        <div class="detailpage1_middle_content_less">
+          <p>
+            <% if !@thumbnail[i].nil? %>
+              <%= link_to image_tag(@thumbnail[i] ,:border=>'0', :title=>media.description,:width=>"100px",:height=>"75px", :alt => media.description),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%>
+            <% end %>
+          </p>
+          <h1><% if !media.description.nil? %><%=media.description[0..30]%><%end%></h1>
+          <h3><% if !media.created_at.nil? %>Created at: <%=media.created_at.strftime("%b %d#{format_date('%d')}, %Y")%><%end%></h3>
+          <h3><% if !media.created_at.nil? %>Views: <%=media.view_count%><%end%></h3>
+          <h3><% if !media.created_at.nil? %>Comments: <%=total_comment_count(media.id)%><%end%></h3>
+          <%if logged_in? %>
+            <%if media.user_id== current_user.id%>            
+              <h2><%=link_to image_tag("/images/delete.png",:style=>"border:0px;"), media_delete_path(media,:page=>params[:page]),  :method => :delete, :confirm => "Are you sure you want to delete ?" %></h2>
+           <%end%>
+          <%end%>
+       </div>
+        <% i = i+1 %>
+    <% end %>
+    <div class="pagination">
+      <%= will_paginate @medias %>
+    </div>    
+  <%else%>
+    <div class="detailpage1_middle_content_less detailpage1_middle_content_less_width"><h1>You haven’t tweeted any media yet, get started!</h1></div>
+  <%end-%>
+</div>  
+  <div class="detailpage1_middle_subright">
+    <div class="detailpage1_middle_subright_topheader"><h1>About</h1></div>
+    <div class="detailpage1_middle_subright_middle"><h1>Name</h1><h2><%=@user_name%></h2>      
+        <% if !@tweets.nil? %>
+          <% x = 0 %>
+          <% @tweets.each do |tweet| -%>
+            <% twitter_user_count = get_count_by_twitter_id(tweet.id) %>
+            <% if twitter_user_count > 0 %>
+              <% if x == 0 %>
+              <div class="detailpage1_middle_subright_middle_photoheading"><h1>Following</h1></div>
+                <div class="detailpage1_middle_subright_middle_photosubhead">
+              <% end %>
+              <% login = get_login_by_twitter_id(tweet.id) %>
+              <h1><%= link_to image_tag(tweet.profile_image_url,:border=>0),"/medias/#{login}" %></h1>              
+             <% x = x + 1 %>
+            <%end%>
+          <%end%>
+          <% if x >0 %>
+            </div>
+           <% end %>
+        <%end%>      
+      <div class="detailpage1_middle_subright_middle_photoheading"><h1>Media    <%=@medias_count%></h1></div>
+    </div>
+    <div class="detailpage1_middle_subright_bottom"><img src="/images/detailpage_about_bottom.png" /></div>
+  </div>
+</div>

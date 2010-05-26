@@ -1,0 +1,15 @@
+<%if @detail_page == true%>
+  <div class="post_bottom_powered"><h1>Powered by drop.io GET THE SOURCE CODE</h1><h2>twitter |&nbsp;&nbsp;</h2><h2>privacy policy</h2></div>
+<% end %>
+<% if @upload_page == true %>
+  <div class="post_bottom_powered"><h3><u>http://tweet.io/<%=current_user.login%></u></h3><h4>When logged ia as <%=current_user.name%> and after media has been posted</h4></div>
+<%end%>
+<div class="post_bottom">
+  <h1>@2010 Tweet.io, All Rights Reserved</h1>
+  <h2><%=link_to 'Home','/home/index'%><img src="/images/detailpage1_homebar.png" id="detailpage1_bottom_bar" /></h2>
+  <h2>Contact<img src="/images/detailpage1_homebar.png" id="detailpage1_bottom_bar" /></h2>
+  <h2><%=link_to 'API','http://api.drop.io',:target=>"blank"%><img src="/images/detailpage1_homebar.png" id="detailpage1_bottom_bar" /></h2>
+  <h2>Terms </h2>
+</div>
+</div>
+</div>
