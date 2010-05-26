@@ -2,6 +2,7 @@ require 'rubygems'
 require 'tmail'
 require 'base64' 
 require 'dropio'
+require 'net/smtp'
 
 
 def sendEmail(to_add,subject,file)
