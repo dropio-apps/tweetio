@@ -19,6 +19,7 @@ class TwitterAuthMigration < ActiveRecord::Migration
       t.string :description
       t.string :profile_image_url
       t.string :url
+      t.string :drop_name
       t.boolean :protected
       t.string :profile_background_color
       t.string :profile_sidebar_fill_color
