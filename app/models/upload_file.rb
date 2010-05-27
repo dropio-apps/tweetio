@@ -34,7 +34,7 @@ class UploadFile < ActiveRecord::Base
     elsif url.include? '.txt' or url.include? '.doc' or url.include? '.pdf' or url.include? '.xls'
       return 4
     else      
-      return 5
+      return 4
     end
   end
 end
