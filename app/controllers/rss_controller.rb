@@ -20,9 +20,9 @@ class RssController < ApplicationController
             @thumbnail << asset_obj.thumbnail
           else
             if media.content_id == 4
-              @thumbnail_list << "/images/document.png"
+               @thumbnail  << "/images/document.png"
             else
-              @thumbnail_list << "/images/media.png"
+               @thumbnail  << "/images/media.png"
             end
           end
        end
@@ -47,9 +47,9 @@ class RssController < ApplicationController
           @thumbnail << asset_obj.thumbnail
         else
           if media.content_id == 4
-            @thumbnail_list << "/images/document.png"
+             @thumbnail  << "/images/document.png"
           else
-             @thumbnail_list << "/images/media.png"
+              @thumbnail  << "/images/media.png"
           end
         end
       end
