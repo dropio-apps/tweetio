@@ -24,7 +24,8 @@ class UploadFile < ActiveRecord::Base
   end
 
   # Get content type form url
-  def self.get_content_type_from_url(url)    
+  def self.get_content_type_from_url(url)
+    url = url.downcase
     if url.include? '.png' or url.include? '.jpg' or url.include? '.gif' or url.include? '.bmp'
       return 1
     elsif url.include? '.wmv' or url.include? '.mov' or url.include? '.3gp' or url.include? '.mp4' or url.include? '.mpg' or url.include? '.rm'
