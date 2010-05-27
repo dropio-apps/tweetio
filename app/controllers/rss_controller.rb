@@ -19,7 +19,11 @@ class RssController < ApplicationController
           if !asset_obj.thumbnail.nil?
             @thumbnail << asset_obj.thumbnail
           else
-            @thumbnail << "/images/media.png"
+            if media.content_id == 4
+              @thumbnail_list << "/images/document.png"
+            else
+              @thumbnail_list << "/images/media.png"
+            end
           end
        end
       render :layout => false
@@ -42,7 +46,11 @@ class RssController < ApplicationController
         if !asset_obj.thumbnail.nil?
           @thumbnail << asset_obj.thumbnail
         else
-          @thumbnail << "/images/media.png"
+          if media.content_id == 4
+            @thumbnail_list << "/images/document.png"
+          else
+             @thumbnail_list << "/images/media.png"
+          end
         end
       end
       render :layout => false
