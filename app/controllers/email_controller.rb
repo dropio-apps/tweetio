@@ -41,7 +41,7 @@ protect_from_forgery :only => [:update, :delete, :create]
             User.dropio_config
             auth_drop = Dropio::Drop.find(drop_name)
             upload_file_details = auth_drop.add_file(filename,description)			
-            content_type = UploadFile.get_content_type(file_type)
+            content_type = UploadFile.get_content_type_from_url(file_type)
 			      # Create Hash for upload
             hash_array = upload_array(user_id,upload_file_details,content_type,upload_type)
             # Save values in databse
