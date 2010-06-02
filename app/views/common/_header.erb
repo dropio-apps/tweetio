@@ -8,9 +8,9 @@
           <h1><%=link_to 'Home','/home/index' %></h1>          
           <%if logged_in?%>
             <p><img src="/images/detail_home_bar.png" /></p>
-            <h1><%=link_to 'Media',medias_user_path(current_user.login) %></h1>
+            <h1><%=link_to 'My Media',medias_user_path(current_user.login) %></h1>
             <p><img src="/images/detail_home_bar.png" /></p>
-            <h1><%=link_to 'Add New Media','/home/file_upload' %></h1>
+            <h1><%=link_to 'Upload Media','/home/file_upload' %></h1>
             <p><img src="/images/detail_home_bar.png" /></p>
             <h1><%=link_to 'Logout','/logout' %></h1>
           <%end%>
