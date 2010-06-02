@@ -17,7 +17,7 @@ class HomeController < ApplicationController
   
   #Home page
   def index  
-    @medias = UploadFile.find(:all,:limit=>10,:order=>"created_at desc")
+    @medias = UploadFile.find(:all,:limit=>10,:conditions=>["content_id IN ('1','2')"],:order=>"created_at desc")
     @thumbnail = Array.new
     @medias.each do |media|
         asset_name = media.name

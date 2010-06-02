@@ -23,8 +23,7 @@ class MediasController < ApplicationController
     else
       @tweets = twitter_follower_list(user_id)
       @user_image = get_user_image(user_id)
-      @user_name = get_user_name_by_id(user_id)
-      @medias_count = UploadFile.count(:conditions=>["user_id=#{user_id}"])
+      @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
       @medias.each do |media|
