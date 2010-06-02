@@ -100,12 +100,14 @@ class HomeController < ApplicationController
             flash[:file_upload_error] = "Error while saving in databae"
           end
           begin
+            description = upload_file_details.description[0..50]
             # Get message for twitter share
-            tweet_message = create_twitter_message(upload_file_id,upload_file_details.description)
+            tweet_message = create_twitter_message(upload_file_id,description)
             # Call the function for share the message in twitter site
             tweet(tweet_message)
           rescue
             flash[:file_upload_error] = "Error While tweeting message using twitter API.Try again later"
+            redirect_to '/home/file_upload'
           end
         # Redirect with successful message          
           flash[:file_upload_error] = "Media Uploaded Successfully"
