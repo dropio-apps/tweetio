@@ -5,12 +5,14 @@
       <div class="addmedia_content">
         <div class="addmedia_content_leftbar"><img src="/images/addmedia_left.png" /></div>
         <div class="addmedia_content_midbar"><h1>Add media now</h1> <h1><span style="color:red;"><%=flash[:file_upload_error]%></span></h1>
-          <div class="addmedia_file"><h1>File&nbsp;&nbsp;&nbsp;:</h1><h2><%= f.file_field 'file_field'%></h2><h1>Or</h1></div>
-          <div class="addmedia_note"><h1>Url&nbsp;:</h1><h2><%= f.text_field :file_url  -%></h2><h3>(Enter valid URl)</h3></div>
-          <div class="addmedia_note"><h1>Note&nbsp;:</h1><h2><%= f.text_area :description, :rows => '1', :cols => '23' %></h2>
+          <div class="addmedia_file"><h1>File&nbsp;&nbsp;&nbsp;</h1><h2><%= f.file_field 'file_field'%></h2><h1>Or</h1></div>
+          <div class="addmedia_note"><h1>Url&nbsp;</h1><h2><%= f.text_field :file_url  -%></h2><h3>(Enter valid URl)</h3></div>
+          <div class="addmedia_note"><h1>Note&nbsp;</h1><h2><%= f.text_area :description, :rows => '1', :cols => '23' %></h2>
             <div class="addmedia_upload">
               <%= f.hidden_field :user_id, :value => current_user.id %>
-              <%= image_submit_tag "/images/upload.png" %></div>
+              <%#= image_submit_tag "/images/upload.png" %>
+              <%= submit_tag "Upload",:style=>"width:73px"%>
+            </div>
           </div>
         </div>
         <div class="addmedia_content_leftbar"><img src="/images/addmedia_right.png" /></div>
