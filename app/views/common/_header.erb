@@ -25,14 +25,14 @@
       <div class="home_signin_content">
         <div class="home_signin">         
           <%if !logged_in? %>
-            <h1> <%=link_to 'Sign in with twitter', '/login' %></h1>            
+            <h1> <%=link_to image_tag("/images/sign-in-with-twitter.png"), '/login' %></h1>
           <% end %>
           <h1><%=flash[:rss_notice]%></h1>
           <%if @upload_page == true %>
             <h2><%=image_tag(current_user.profile_image_url)%></h2>
             <h1><%=current_user.name%></h1>
-          <%else%>
-            <h2><img src="/images/bird.png" /> </h2>
+          <%#else%>
+           <!-- <h2><img src="/images/bird.png" /> </h2>-->
           <%end %>
       </div></div>
     </div>
