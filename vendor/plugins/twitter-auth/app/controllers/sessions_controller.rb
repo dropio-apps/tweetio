@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:request_token_secret] = @request_token.secret
      
       url = @request_token.authorize_url
-      url << "&force_login=true&oauth_callback=#{CGI.escape(TwitterAuth.oauth_callback)}" if TwitterAuth.oauth_callback?
+      url << "&oauth_callback=#{CGI.escape(TwitterAuth.oauth_callback)}" if TwitterAuth.oauth_callback?
       redirect_to url
     else
       # we don't have to do anything, it's just a simple form for HTTP basic!
