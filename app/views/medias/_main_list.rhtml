@@ -15,9 +15,9 @@
             <% end %>
           </p>
           <h1><% if !media.description.nil? %><%=media.description[0..30]%><%end%></h1>
-          <h3><% if !media.created_at.nil? %>Created at: <%=media.created_at.strftime("%b %d#{format_date('%d')}, %Y")%><%end%></h3>
-          <h3><% if !media.created_at.nil? %>Views: <%=media.view_count%><%end%></h3>
-          <h3><% if !media.created_at.nil? %>Comments: <%=total_comment_count(media.id)%><%end%></h3>
+          <h3><% if !media.created_at.nil? %>Created at:<%day_pos = format_date(media.created_at.strftime('%d'))%><%=media.created_at.strftime("%b %d#{day_pos}, %Y")%><%end%>
+          <% if !media.created_at.nil? %>Views:<%=media.view_count%><%end%>
+          <% if !media.created_at.nil? %>Comments:<%=total_comment_count(media.id)%><%end%></h3>
           <%if logged_in? %>
             <%if media.user_id== current_user.id%>            
               <h2><%=link_to image_tag("/images/delete.png",:style=>"border:0px;"), media_delete_path(media,:page=>params[:page]),  :method => :delete, :confirm => "Are you sure you want to delete ?" %></h2>

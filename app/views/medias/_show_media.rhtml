@@ -52,9 +52,9 @@
         <p><%=image_tag(@user_image,:height=>"75",:width=>"75")%></p><h1><%=@user_name%></h1>
       <% end  %>
       <% if !@media_details.nil? %>
-        <h2>Posted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=(@media_details.created_at).strftime("%b %d#{format_date('%d')}, %Y")%></h2>
-        <h2>Views &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=@media_details.view_count%></h2>
-        <h2>Comments &nbsp; <%=total_comment_count(@media_details.id)%></h2>
+        <h2>Posted&nbsp;&nbsp;<%day_pos = @media_details.created_at.strftime('%d')%><b><%=(@media_details.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></b></h2>
+        <h2>Views&nbsp;&nbsp;<%=@media_details.view_count%></h2>
+        <h2>Comments&nbsp;&nbsp;<%=total_comment_count(@media_details.id)%></h2>
       <% end %>
     </div>
     
@@ -69,7 +69,7 @@
                 <% for media in @media_list %>                  
                     <% total_comment = "" %>
                     <div class="post_postview_comments">
-                      <h1><% if !@thumbnail_list[i].nil? %><%= link_to image_tag(@thumbnail_list[i] ,:width=>"50px",:height=>"50px",:border=>'0', :title=>media.description, :alt => media.description),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%><% end %></h1><h2>Posted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=(media.created_at).strftime("%b %d#{format_date('%d')}, %Y")%></h2><h3>Views&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=media.view_count%></h3>
+                      <h1><% if !@thumbnail_list[i].nil? %><%= link_to image_tag(@thumbnail_list[i] ,:width=>"50px",:height=>"50px",:border=>'0', :title=>media.description, :alt => media.description),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%><% end %></h1><h2>Posted&nbsp;&nbsp;<%day_pos = media.created_at.strftime('%d')%><b><%=(media.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></b></h2><h3>Views&nbsp;&nbsp;<%=media.view_count%></h3>
                       <h3><% total_comment = total_comment_count(media.id)%>Comments&nbsp;<%=total_comment%></h3>
                     </div>                 
                  <% i = i+1 %>
@@ -95,7 +95,7 @@
           <% user_name = get_user_name_by_id(comment.users_id)
              user_image = get_user_image(comment.users_id)
           %>
-          <div class="addmedia_awesome_holecontent_mid_subcontent"><p><%=image_tag(user_image)%> </p><h1><%=user_name%>: <%=comment.comments%></h1><h2>Posted: <%=(comment.created_at).strftime("%b %d#{format_date('%d')}, %Y")%></h2>
+          <div class="addmedia_awesome_holecontent_mid_subcontent"><p><%=image_tag(user_image)%> </p><h1><%=user_name%>: <%=comment.comments%></h1><h2>Posted: <% day_pos = comment.created_at.strftime('%d')%><%=(comment.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></h2>
             <% if logged_in? %>
               <h3><%=link_to 'Delete',comment_delete_path(comment.id) ,:confirm=>"Are you sure you want to delete this comment?" %></h3>
             <%end %>
