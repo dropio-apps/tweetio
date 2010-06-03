@@ -1,6 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   require "parseconfig"
+  require "twitter"
 
   # Get user name by ID
   def get_user_name_by_id(user_id)
