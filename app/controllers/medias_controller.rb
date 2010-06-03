@@ -205,7 +205,7 @@ end
     consumer_key,consumer_secret = twitter_consumer_config_value
     client = Twitter::OAuth.new(consumer_key,consumer_secret)
     client.authorize_from_access(user.access_token, user.access_secret)
-    client = Twitter::Base.new(oauth)
+    client = Twitter::Base.new(client)
     user_data = client.user(user.login)
     return user_data.profile_image_url,user_data.description
   end
