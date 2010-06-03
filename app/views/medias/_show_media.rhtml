@@ -48,7 +48,7 @@
   <div class="post_middle_rightcontent_top"><img src="/images/post_righthead_topp.png" /></div>
   <div class="post_middle_rightcontent_middle">     
     <div class="post_middle_rightcontent_topheading">
-      <% if !avatar.nil? %>
+      <% if !@user_image.nil? %>
         <p><%=image_tag(@user_image,:height=>"75",:width=>"75")%></p><h1><%=@user_name%></h1>
       <% end  %>
       <% if !@media_details.nil? %>
