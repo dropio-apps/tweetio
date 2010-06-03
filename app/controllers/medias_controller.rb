@@ -203,9 +203,9 @@ end
   def get_twitter_avatar_bio(user_id)
     user = User.find(:first,:conditions=>["id=?",user_id])
     consumer_key,consumer_secret = twitter_consumer_config_value
-    client = Twitter::OAuth.new(consumer_key,consumer_secret)
-    client.authorize_from_access(user.access_token, user.access_secret)
-    client = Twitter::Base.new(client)
+    oauth = Twitter::OAuth.new(consumer_key,consumer_secret)
+    oauth.authorize_from_access(user.access_token, user.access_secret)
+    client = Twitter::Base.new(oauth)
     user_data = client.user(user.login)
     return user_data.profile_image_url,user_data.description
   end
