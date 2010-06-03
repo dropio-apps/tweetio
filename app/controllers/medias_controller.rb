@@ -201,7 +201,7 @@ end
 
    # Get User avatar image & description
   def get_twitter_avatar_bio(user_id)
-    user = User.find(:all,:conditions=>["id=?",user_id])
+    user = User.find(:first,:conditions=>["id=?",user_id])
     consumer_key,consumer_secret = twitter_consumer_config_value
     client = Twitter::OAuth.new(consumer_key,consumer_secret)
     client.authorize_from_access(user.access_token, user.access_secret)
