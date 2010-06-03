@@ -36,7 +36,7 @@
   <div class="detailpage1_middle_subright">
     <div class="detailpage1_middle_subright_topheader"><h1>Name</h1><h2><%=@user_name%></h2></div>
     <div class="detailpage1_middle_subright_middle"><h1>About</h1>
-        <h4><%="sdfsdfsdf dsfsdf sdfdsdsfsdf sdfdsdsfsdf sdfdsdsfsdf sdfdsdsfsdf sdfdsdsfsdf sdfds"%></h4>
+        <h4><%=@user_desc%></h4>
         <% if !@tweets.nil? %>
           <% x = 0 %>
           <% @tweets.each do |tweet| -%>
