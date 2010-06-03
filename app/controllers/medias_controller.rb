@@ -22,7 +22,7 @@ class MediasController < ApplicationController
       redirect_to '/home'
     else
       @tweets = twitter_follower_list(user_id)
-      @user_id = user_id
+      @user_image,@user_desc = get_twitter_avatar_bio(user_id)
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
@@ -83,7 +83,7 @@ end
       else
         begin
           user_id = get_user_id_media_id(media_id)
-          @user_id = user_id          
+          @user_image,@user_desc = get_twitter_avatar_bio(user_id)
           @user_name = get_user_name_by_id(user_id)
           # find media with id in DB
           @media_details = UploadFile.find(media_id)
@@ -197,5 +197,18 @@ end
     client = Twitter::Base.new(oauth)
     @tweets = client.friends
     return @tweets
+  end
+
+   # Get User avatar image & description
+  def get_twitter_avatar_bio(user_id)
+    user = User.find(:all,:conditions=>["id=?",user_id])
+    consumer_key,consumer_secret = twitter_consumer_config_value
+    client = TwitterOAuth::Client.new(
+    :consumer_key => consumer_key,
+    :consumer_secret => consumer_secret,
+    :token => user.access_token,
+    :secret => user.access_secret)
+    user_data = client.user(user.login)
+    return user_data.profile_image_url,user_data.description
   end
 end

@@ -231,21 +231,7 @@ module ApplicationHelper
     consumer_key = my_config.get_value('consumer_key')
     consumer_secret = my_config.get_value('consumer_secret')
     return consumer_key,consumer_secret
-  end
-
-  
-  # Get User avatar image & description
-  def get_twitter_avatar_bio(user_id)
-    user = User.find(:all,:conditions=>["id=?",user_id])
-    consumer_key,consumer_secret = twitter_consumer_config_value
-    client = TwitterOAuth::Client.new(
-    :consumer_key => consumer_key,
-    :consumer_secret => consumer_secret,
-    :token => user.access_token,
-    :secret => user.access_secret)
-    user_data = client.user(user.login)
-    return user_data.profile_image_url,user_data.description
-  end
+  end 
 
   # Get Drop.io admin password
   def get_drop_io_admin_password
