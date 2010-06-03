@@ -212,12 +212,12 @@ module ApplicationHelper
   end
 
   # Date format manupulation
-  def format_date(date_value)
-    if date_value.include? 1 or date_value.include? 21 or date_value.include? 31
+  def format_date(date_value)    
+    if date_value.include? "01" or date_value.include? "21" or date_value.include? "31"
       return "st"
-    elsif date_value.include? 2 or date_value.include? 22
+    elsif date_value.include? "02" or date_value.include? "22"
       return "nd"
-    elsif date_value.include? 3 or date_value.include? 23
+    elsif date_value.include? "03" or date_value.include? "23"
       return "rd"
     else
       return "th"
@@ -230,6 +230,20 @@ module ApplicationHelper
     consumer_key = my_config.get_value('consumer_key')
     consumer_secret = my_config.get_value('consumer_secret')
     return consumer_key,consumer_secret
+  end
+
+  
+  # Get User avatar image & description
+  def get_twitter_avatar_bio(user_id)
+    user = User.find(:all,:conditions=>["id=?",user_id])
+    consumer_key,consumer_secret = twitter_consumer_config_value
+    client = TwitterOAuth::Client.new(
+    :consumer_key => consumer_key,
+    :consumer_secret => consumer_secret,
+    :token => user.access_token,
+    :secret => user.access_secret)
+    user_data = client.user(user.login)
+    return user_data.profile_image_url,user_data.description
   end
 
   # Get Drop.io admin password

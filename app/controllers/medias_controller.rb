@@ -22,7 +22,7 @@ class MediasController < ApplicationController
       redirect_to '/home'
     else
       @tweets = twitter_follower_list(user_id)
-      @user_image = get_user_image(user_id)
+      @user_id = user_id
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
@@ -83,7 +83,7 @@ end
       else
         begin
           user_id = get_user_id_media_id(media_id)
-          @user_image = get_user_image(user_id)
+          @user_id = user_id          
           @user_name = get_user_name_by_id(user_id)
           # find media with id in DB
           @media_details = UploadFile.find(media_id)

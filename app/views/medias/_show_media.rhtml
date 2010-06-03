@@ -1,3 +1,4 @@
+<% avatar,description = get_twitter_avatar_bio(@user_id) %>
 <div class="post_middle">
   <div class="post_middle_leftcontent">
       <% if @media_error.nil? %>
@@ -48,8 +49,8 @@
   <div class="post_middle_rightcontent_top"><img src="/images/post_righthead_topp.png" /></div>
   <div class="post_middle_rightcontent_middle">     
     <div class="post_middle_rightcontent_topheading">
-      <% if !@user_image.nil? %>
-        <p><%=image_tag(@user_image,:height=>"75",:width=>"75")%></p><h1><%=@user_name%></h1>
+      <% if !avatar.nil? %>
+        <p><%=image_tag(avatar,:height=>"75",:width=>"75")%></p><h1><%=@user_name%></h1>
       <% end  %>
       <% if !@media_details.nil? %>
         <h2>Posted&nbsp;&nbsp;<%day_pos = @media_details.created_at.strftime('%d')%><b><%=(@media_details.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></b></h2>

@@ -1,7 +1,8 @@
 <div class="detailpage1_middle">
 <div class="detailpage1_middle_subleft">    
     <div class="user_thumb">
-      <p><%= image_tag @user_image %></p>
+      <% avatar,description = get_twitter_avatar_bio(@user_id) %>
+      <p><%= image_tag avatar %></p>
       <h1><%=@user_name%></h1>
       <br style="clear:both;">
     </div>
@@ -34,8 +35,9 @@
   <%end-%>
 </div>  
   <div class="detailpage1_middle_subright">
-    <div class="detailpage1_middle_subright_topheader"><h1>About</h1></div>
-    <div class="detailpage1_middle_subright_middle"><h1>Name</h1><h2><%=@user_name%></h2>      
+    <div class="detailpage1_middle_subright_topheader"><h1>Name</h1><h2><%=@user_name%></h2></div>
+    <div class="detailpage1_middle_subright_middle"><h1>About</h1>
+        <%=description%>
         <% if !@tweets.nil? %>
           <% x = 0 %>
           <% @tweets.each do |tweet| -%>
