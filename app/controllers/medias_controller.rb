@@ -22,8 +22,7 @@ class MediasController < ApplicationController
       redirect_to '/home'
     else
      @tweets = twitter_follower_list(user_id)
-     @user_image,@user_desc = get_twitter_avatar_bio(user_id)
-     @user_image = ""
+     @user_image,@user_desc = get_twitter_avatar_bio(user_id)     
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
