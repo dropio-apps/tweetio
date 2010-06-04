@@ -38,18 +38,6 @@ class HomeController < ApplicationController
         end
      end
   end
-  def image_aspect(height,width)
-    static_width = 50
-    if width > height or width == height
-      fraction = width/height
-      height = static_width * width/height * fraction      
-    else
-      fraction = height/width
-      height = static_width * height/width * fraction 
-    end
-    return static_width.to_i,height.to_i
-  end
-
 
   # File upload form
   def file_upload
@@ -185,5 +173,19 @@ class HomeController < ApplicationController
       end
       return true
     end
+  end
+  
+  def image_aspect(height,width)
+    height = height.to_i
+    width = width.to_i
+    static_width = 50
+    if width > height or width == height
+      fraction = width/height
+      height = static_width * width/height * fraction      
+    else
+      fraction = height/width
+      height = static_width * height/width * fraction 
+    end
+    return static_width.to_i,height.to_i
   end
 end
