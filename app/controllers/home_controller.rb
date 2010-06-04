@@ -176,8 +176,8 @@ class HomeController < ApplicationController
   end
   
   def image_aspect(height,width)
-    height = height.to_i
-    width = width.to_i
+    puts height = height.to_i
+    puts width = width.to_i
     static_width = 50
     if width > height or width == height
       fraction = width/height
