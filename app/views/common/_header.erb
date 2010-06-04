@@ -3,7 +3,7 @@
     <div class="post_header">
       <div class="post_header_logo"><%=link_to image_tag("/images/tweetlogo.png",:border=>"0"),'/home/index' %></div>
       <div class="detailpage1_header_home_lefttop">
-        <div class="detailpage1_header_home_left"><img src="/images/detail_header_left.png" /></div>
+        
         <div class="detailpage1_header_home_middle">          
           <h1><%=link_to 'Home','/home/index' %></h1>          
           <%if logged_in?%>
@@ -11,18 +11,22 @@
             <h1><%=link_to 'My Media',medias_user_path(current_user.login) %></h1>
             <p><img src="/images/detail_home_bar.png" /></p>
             <h1><%=link_to 'Upload Media',media_file_upload_path %></h1>
-            <p><img src="/images/detail_home_bar.png" /></p>
-            <h1><%=link_to 'Logout','/logout' %></h1>
           <%end%>
           <p><img src="/images/detail_home_bar.png" /></p>
           <h1><%=link_to 'About','#' %></h1>          
+          <%if logged_in?%>
+            <p><img src="/images/detail_home_bar.png" /></p>
+            <h1><%=link_to 'Logout','/logout' %></h1>
+          <%end%>   
+        </div>
+        <div style="float:left;padding-top:5px;padding-left:5px;">
           <% if logged_in? %>
-            <h3><%=link_to image_tag("/images/detail_about_image.png",:border=>"0"),rss_user_path(current_user.login) %></h3>
+            <%=link_to image_tag("/images/detail_about_image.png",:border=>"0"),rss_user_path(current_user.login) %>
           <% else %>
-            <h3><%=link_to image_tag("/images/detail_about_image.png",:border=>"0"),rss_path %></h3>
+            <%=link_to image_tag("/images/detail_about_image.png",:border=>"0"),rss_path %>
           <% end %>
         </div>
-        <div class="detailpage1_header_home_right"><img src="/images/detail_header_right.png" /></div>
+         
     </div>     
       <div class="home_signin_content">
         <div class="home_signin">         
@@ -31,7 +35,7 @@
           <% end %>
           <h1><%=flash[:rss_notice]%></h1>
           <%if @upload_page == true %>
-            <h2><%=image_tag(current_user.profile_image_url)%></h2>
+            <h2><%=image_tag @user_image%></h2>
             <h1><%=current_user.name%></h1>
           <%#else%>
            <!-- <h2><img src="/images/bird.png" /> </h2>-->

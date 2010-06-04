@@ -13,6 +13,7 @@
 class HomeController < ApplicationController
 	require 'rubygems'
 	require 'dropio'
+  require 'twitter'
   before_filter :login_required, :except => [:index,:redirect_media]
   
   #Home page
@@ -26,9 +27,9 @@ class HomeController < ApplicationController
         asset_obj = asset_find(asset_name,media.drop_name)        
         if !asset_obj.thumbnail.nil?
           @thumbnail << asset_obj.thumbnail
-         # width,height = image_aspect(asset_obj.height,asset_obj.width)
-         # thumb_width << width
-         # @thumb_height << height
+          width,height = image_aspect(asset_obj.height,asset_obj.width)
+          @thumb_width << width
+          @thumb_height << height
         else
           if media.content_id == 4
             @thumbnail << "/images/document.png"
@@ -42,6 +43,7 @@ class HomeController < ApplicationController
   # File upload form
   def file_upload
     @upload_page = true
+    @user_image,@user_desc = get_twitter_avatar_bio(current_user.id)
   end
 
   # File upload submit action
@@ -50,7 +52,7 @@ class HomeController < ApplicationController
     validation_status = error_validation
     # if validation function return false, redirect to previous page with valid error message
     if !validation_status
-      redirect_to '/home/file_upload'
+      redirect_to media_file_upload_path
     else
       if !params['uploadfile']['file_field'].nil?
         upload_file_name =  params['uploadfile']['file_field'].original_filename
@@ -175,7 +177,7 @@ class HomeController < ApplicationController
     end
   end
   
-  def image_aspect(height,width)  
+  def image_aspect(height,width)
     height = height.to_i
     width = width.to_i
     static_width = 50
@@ -187,5 +189,16 @@ class HomeController < ApplicationController
       height = static_width * height/width * fraction 
     end
     return static_width.to_i,height.to_i
+  end
+
+   # Get User avatar image & description
+  def get_twitter_avatar_bio(user_id)
+    user = User.find(:first,:conditions=>["id=?",user_id])
+    consumer_key,consumer_secret = twitter_consumer_config_value
+    oauth = Twitter::OAuth.new(consumer_key,consumer_secret)
+    oauth.authorize_from_access(user.access_token, user.access_secret)
+    client = Twitter::Base.new(oauth)
+    user_data = client.user(user.login)
+    return user_data.profile_image_url,user_data.description
   end
 end
