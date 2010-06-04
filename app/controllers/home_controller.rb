@@ -19,11 +19,16 @@ class HomeController < ApplicationController
   def index  
     @medias = UploadFile.find(:all,:limit=>10,:conditions=>["content_id IN ('1','2')"],:order=>"created_at desc")
     @thumbnail = Array.new
+    @thumb_width = Array.new
+    @thumb_height = Array.new
     @medias.each do |media|
         asset_name = media.name
         asset_obj = asset_find(asset_name,media.drop_name)        
         if !asset_obj.thumbnail.nil?
           @thumbnail << asset_obj.thumbnail
+          width,height = image_aspect(asset_obj.height,asset_obj.width)
+          @thumb_width << width
+          @thumb_height << height
         else
           if media.content_id == 4
             @thumbnail << "/images/document.png"
@@ -33,7 +38,19 @@ class HomeController < ApplicationController
         end
      end
   end
-  
+  def image_aspect(height,width)
+    static_width = 50
+    if width > height or width == height
+      fraction = width/height
+      height = static_width * width/height * fraction      
+    else
+      fraction = height/width
+      height = static_width * height/width * fraction 
+    end
+    return static_width.to_i,height.to_i
+  end
+
+
   # File upload form
   def file_upload
     @upload_page = true
@@ -88,7 +105,7 @@ class HomeController < ApplicationController
           upload_file_details = drop_file_upload(upload_file_path,upload_type,description)
         rescue          
           flash[:file_upload_error] = "Error while uploading file. Try later"
-          redirect_to '/home/file_upload'
+          redirect_to media_file_upload_path
         end
           # Create hash for save upload datas in database
           user_id = params['uploadfile']['user_id']
@@ -100,23 +117,26 @@ class HomeController < ApplicationController
             flash[:file_upload_error] = "Error while saving in databae"
           end
           begin
-            description = upload_file_details.description[0..50]
+            if description.length > 50
+              description = upload_file_details.description[0..47]
+              description = description+"..."            
+            end
             # Get message for twitter share
             tweet_message = create_twitter_message(upload_file_id,description)
             # Call the function for share the message in twitter site
             tweet(tweet_message)
           rescue
             flash[:file_upload_error] = "Error While tweeting message using twitter API.Try again later"
-            redirect_to '/home/file_upload'
+            redirect_to media_file_upload_path
           end
         # Redirect with successful message          
           flash[:file_upload_error] = "Media Uploaded Successfully"
-          redirect_to '/home/file_upload'
+          redirect_to media_file_upload_path
       rescue
         # Notice Error message
         flash[:file_upload_error] = "Error while uploading file. Try later"
         # Redirect to Home page
-        redirect_to '/home/file_upload'
+        redirect_to media_file_upload_path
       end
     end
   end

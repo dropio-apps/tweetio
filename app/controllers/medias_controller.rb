@@ -21,8 +21,9 @@ class MediasController < ApplicationController
       flash[:rss_notice] = "There is problem access this page"
       redirect_to '/home'
     else
-      @tweets = twitter_follower_list(user_id)
-      @user_image,@user_desc = get_twitter_avatar_bio(user_id)
+     @tweets = twitter_follower_list(user_id)
+     @user_image,@user_desc = get_twitter_avatar_bio(user_id)
+     @user_image = ""
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new

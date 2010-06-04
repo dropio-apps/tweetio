@@ -1,7 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  require "parseconfig"
-  require "twitter"
+  require "parseconfig"  
 
   # Get user name by ID
   def get_user_name_by_id(user_id)
@@ -138,7 +137,7 @@ module ApplicationHelper
     end
     # Add description with URL
     if !twit_description.nil?
-      tweet_message = twit_url +" - " +twit_description
+      tweet_message = twit_description+":"+twit_url
     else
       tweet_message = twit_url
     end

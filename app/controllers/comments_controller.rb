@@ -13,7 +13,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     comments = params[:comment][:comments]
     # Twitter will accept only 140 character with URL
-    comments = comments[0..50]
+    if comments.length > 50
+      comments = comments[0..47]
+      comments = comments+"..."
+    end
+
     if @comment.save
        # Create URL to share with twitter
        upload_file_id = params[:comment][:upload_file_id]

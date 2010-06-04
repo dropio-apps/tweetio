@@ -46,8 +46,13 @@ protect_from_forgery :only => [:update, :delete, :create]
             hash_array = upload_array(user_id,upload_file_details,content_type,upload_type)
             # Save values in databse
             upload_file_id = upload_save(hash_array)
+            comments =  mail.subject.to_s
+            if comments.length > 50
+              comments = comments[0..47]
+              comments = comments+"..."
+            end
             # Create twitter message
-            tweet_message = create_twitter_message(upload_file_id,mail.subject.to_s)
+            tweet_message = create_twitter_message(upload_file_id,comments)
             # Call the function for share the message in twitter site
             tweet_email_message(user_id,tweet_message)
           end

@@ -46,7 +46,7 @@ ActionController::Routing::Routes.draw do |map|
    map.medias 'medias' , :controller => "medias",:action=>'index'
    map.media_show 'medias/show/:id',:controller => "medias",:action=>'show'
    map.media_delete 'medias/delete/:id',:controller => "medias",:action=>'destroy'
-   map.media_file_upload 'file_upload',:controller => "home",:action=>'file_upload'
+   map.media_file_upload 'add/media',:controller => "home",:action=>'file_upload'
    map.comment_delete 'comments/delete/:id',:controller => "comments",:action=>'destroy'
    map.api_asset 'api/drops/:drop_name/assets/:asset_name/embed_code', :controller=>"home", :action=>"redirect_media"
     map.resources :pictures
