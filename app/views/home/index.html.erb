@@ -23,7 +23,7 @@
             <% @medias.each do |media|%>
               <% if !@thumbnail[i].nil? %>
                 <div class="recent_scroll_div">
-                <%= link_to image_tag(@thumbnail[i],:border=>'0',:width=>@thumb_width[i],:height=>@thumb_height[i]),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%>
+                <%= link_to image_tag(@thumbnail[i],:border=>'0'),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%>
                 </div>
               <% end %>
               <% i = i+1  %>
