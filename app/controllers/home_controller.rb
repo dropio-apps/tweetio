@@ -176,6 +176,7 @@ class HomeController < ApplicationController
   end
   
   def image_aspect(height,width)
+  puts "commingggggggggggggggggggggg"
     puts height = height.to_i
     puts width = width.to_i
     static_width = 50
