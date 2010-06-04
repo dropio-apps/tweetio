@@ -27,9 +27,9 @@ class HomeController < ApplicationController
         asset_obj = asset_find(asset_name,media.drop_name)        
         if !asset_obj.thumbnail.nil?
           @thumbnail << asset_obj.thumbnail
-          width,height = image_aspect(asset_obj.height,asset_obj.width)
-          @thumb_width << width
-          @thumb_height << height
+#          width,height = image_aspect(asset_obj.height,asset_obj.width)
+#          @thumb_width << width
+#          @thumb_height << height
         else
           if media.content_id == 4
             @thumbnail << "/images/document.png"
