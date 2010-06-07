@@ -248,3 +248,7 @@ width:660px;
         width:60px;
         overflow:hidden;
     }
+.twitter_div {
+    clear:both;
+    text-align:right;    
+}
