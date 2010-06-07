@@ -87,7 +87,7 @@ module ApplicationHelper
   def drop_create
     User.dropio_config
     get_drop_io_admin_password
-    drop = Dropio::Drop.create({:name => current_user.login,:admin_password=>get_drop_io_admin_password})#current_user.login
+    drop = Dropio::Drop.create({:name => current_user.login,:admin_password=>get_drop_io_admin_password,:expiration_length=>'1_YEAR_FROM_LAST_VIEW'})#current_user.login
     return drop.name
   end
 
