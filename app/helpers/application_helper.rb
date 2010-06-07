@@ -56,6 +56,12 @@ module ApplicationHelper
     return @user.login
   end
 
+  # Get user id by twitter id
+  def get_user_id_by_twitter_id(twitter_id)
+    @user = User.find(:first  ,:select=>"id",:conditions=>["twitter_id=?",twitter_id])
+    return @user.id
+  end
+
 
   # Get user image by ID
   def get_user_image(user_id)

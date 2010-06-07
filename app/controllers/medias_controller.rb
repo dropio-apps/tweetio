@@ -22,7 +22,8 @@ class MediasController < ApplicationController
       redirect_to '/home'
     else
      @tweets = twitter_follower_list(user_id)
-     @user_image,@user_desc = get_twitter_avatar_bio(user_id)     
+     @user_image,@user_desc = get_twitter_avatar_bio(user_id)
+    
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
@@ -39,9 +40,8 @@ class MediasController < ApplicationController
           end
         end
     end
-end
-    
   end
+end
 
   def shared    
     @file_detail = UploadFile.find(params[:id])
@@ -144,6 +144,18 @@ end
     end
   end
 
+  # Get User avatar image & description
+  def get_twitter_avatar_bio(user_id)
+    user = User.find(:first,:conditions=>["id=?",user_id])
+    consumer_key,consumer_secret = twitter_consumer_config_value
+    oauth = Twitter::OAuth.new(consumer_key,consumer_secret)
+    oauth.authorize_from_access(user.access_token, user.access_secret)
+    client = Twitter::Base.new(oauth)
+    user_data = client.user(user.login)
+    return user_data.profile_image_url,user_data.description
+  end
+
+
   # Private methods
   private
 
@@ -197,16 +209,6 @@ end
     client = Twitter::Base.new(oauth)
     @tweets = client.friends
     return @tweets
-  end
-
-  # Get User avatar image & description
-  def get_twitter_avatar_bio(user_id)
-    user = User.find(:first,:conditions=>["id=?",user_id])
-    consumer_key,consumer_secret = twitter_consumer_config_value
-    oauth = Twitter::OAuth.new(consumer_key,consumer_secret)
-    oauth.authorize_from_access(user.access_token, user.access_secret)
-    client = Twitter::Base.new(oauth)
-    user_data = client.user(user.login)
-    return user_data.profile_image_url,user_data.description
-  end
+  end 
+ 
 end
