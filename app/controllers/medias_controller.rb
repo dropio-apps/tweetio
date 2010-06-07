@@ -152,7 +152,7 @@ end
     oauth.authorize_from_access(user.access_token, user.access_secret)
     client = Twitter::Base.new(oauth)
     user_data = client.user(user.login)
-    return user_data.profile_image_url
+    return user_data.profile_image_url,user_data.description
   end
 
 
