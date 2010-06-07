@@ -47,7 +47,7 @@
                 <div class="detailpage1_middle_subright_middle_photosubhead">
               <% end %>              
               <% user_id = get_user_id_by_twitter_id(tweet.id) %>
-              <% user_image = @controller.get_twitter_avatar_bio(user_id) %>
+              <% user_image,desc = @controller.get_twitter_avatar_bio(user_id) %>
               <% login = get_login_by_twitter_id(tweet.id) %>
               <h1><%= link_to image_tag(user_image,:border=>0),"/medias/#{login}" %></h1>
              <% x = x + 1 %>
