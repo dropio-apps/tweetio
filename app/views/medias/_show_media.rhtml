@@ -93,7 +93,7 @@
       <div class="addmedia_awesome_holecontent_mid">
         <% @comment_list.each do |comment| %>
           <% user_name = get_user_name_by_id(comment.users_id)
-             user_image = get_user_image(comment.users_id)
+             user_image,desc = @controller.get_twitter_avatar_bio(comment.user_id)
           %>
           <div class="addmedia_awesome_holecontent_mid_subcontent"><p><%=image_tag(user_image)%> </p><h1><%=user_name%>: <%=comment.comments%></h1><h2>Posted: <% day_pos = comment.created_at.strftime('%d')%><%=(comment.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></h2>
             <% if logged_in? %>
