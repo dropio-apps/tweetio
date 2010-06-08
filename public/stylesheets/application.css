@@ -64,7 +64,7 @@ width:660px;
 .detailpage1_middle_subleft p{ float:left;margin:0; padding:0; padding-left:10px; padding-top:10px; padding-bottom:10px;}
 .detailpage1_middle_subright{ float:left; width:260px;}
 .detailpage1_middle_subright_topheader{ float:left; width:251px; height:32px; background-image:url(/images/detail_about.png); background-repeat:no-repeat;}
-.detailpage1_middle_subright_topheader h1{ float:left; margin:0; padding:0; font-size:13px; color:#30302E; padding-left:17px; padding-top:10px; }
+.detailpage1_middle_subright_topheader h1{ float:left; margin:0; padding:0; font-size:13px; color:#30302E; padding-left:14px; padding-top:10px; }
 .detailpage1_middle_subright_topheader h2{ background-repeat:no-repeat;float:left; margin:0; padding:0; font-size:12px; padding-left:14px; font-weight:normal; width:100px;color:#30302e;padding-bottom:10px;padding-top:10px;}
 
 .detailpage1_middle_subright_middle{float:left; width:249px; background-color:#FFFFFF;border-left:solid 1px #004ba8;border-right:solid 1px #004ba8;}
