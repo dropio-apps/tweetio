@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
     cookies[:remember_token] = @user.remember_me
 
-    authentication_succeeded("","/home/index")
+    authentication_succeeded("","/add/media")
   rescue Net::HTTPServerException => e
     case e.message
       when '401 "Unauthorized"'

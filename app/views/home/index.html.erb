@@ -10,7 +10,11 @@
     <h1>How do I use Tweet.io?</h1>    
     <h2>Post media to Twitter using the Tweet.io web site or your <span class="home_subtext_twitter"><%= link_to 'mobile device.',media_file_upload_path%></span></h2>
     <h2>Simply click on log-in on Tweet.io to begin using the service. If you do not have a Twitter account yet, sign-up for one at <span class="home_subtext_twitter"><a href="http://twitter.com" target="_blank">Twitter.com</a></span>.</h2>    
-    <div class="twitter_div"><%=link_to image_tag("/images/sign-in-with-twitter.png",:border=>"0"), '/login' %></div>
+    <div class="twitter_div">
+      <% if !logged_in? %>
+        <%=link_to image_tag("/images/sign-in-with-twitter.png",:border=>"0"), '/login' %>
+      <% end %>
+    </div>
 
   </div>
   <div class="home_middle_recentsub_heading">
