@@ -1,12 +1,16 @@
 <div class="post_middle">
   <div class="post_middle_leftcontent">
-      <% if @media_error.nil? %>        
-        <div style="height:30px;">
-            <% form_tag "/medias/change_asset_name/#{params[:id]}", :method=>"post" do%>
-              <%= text_field 'media','media_name',:value=>@media_details.media_name %>
-              <%= submit_tag 'Edit' %>
-            <% end %>
-        </div>
+      <% if @media_error.nil? %>
+        <% if logged_in? %>
+          <% if current_user.id == @media_details.user_id %>
+            <div style="height:30px;">
+                <% form_tag "/medias/change_asset_name/#{params[:id]}", :method=>"post" do%>
+                  <%= text_field 'media','media_name',:value=>@media_details.media_name %>
+                  <%= submit_tag 'Edit' %>
+                <% end %>
+            </div>
+          <% end %>
+        <% end %>
          <% if @media_details.content_id == 1%>
            <div class="post_middle_image">
              <p>
