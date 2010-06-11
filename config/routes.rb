@@ -40,7 +40,8 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
    map.root :controller => "home",:action=>'index'
    map.rss 'rss', :controller => "rss",:action=>'rssfeed'
-   map.rss_user 'rss/:user', :controller => "rss",:action=>'rssfeed_user'   
+   map.rss_user 'rss/:user', :controller => "rss",:action=>'rssfeed_user'
+   map.change_asset_name 'medias/change_asset_name/:encrypt_id',:controller => "medias",:action=>'change_asset_name'
    map.medias_shared 'medias/shared/:id/:content_id', :controller => "medias",:action=>'shared'
    map.medias_user 'medias/:login' , :controller => "medias",:action=>'user_media'
    map.medias 'medias' , :controller => "medias",:action=>'index'

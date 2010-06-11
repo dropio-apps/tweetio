@@ -1,6 +1,12 @@
 <div class="post_middle">
   <div class="post_middle_leftcontent">
-      <% if @media_error.nil? %>
+      <% if @media_error.nil? %>        
+        <div style="height:30px;">
+            <% form_tag "/medias/change_asset_name/#{params[:id]}", :method=>"post" do%>
+              <%= text_field 'media','media_name',:value=>@media_details.media_name %>
+              <%= submit_tag 'Edit' %>
+            <% end %>
+        </div>
          <% if @media_details.content_id == 1%>
            <div class="post_middle_image">
              <p>
@@ -69,7 +75,7 @@
                 <% for media in @media_list %>                  
                     <% total_comment = "" %>
                     <div class="post_postview_comments">
-                      <h1><div class="thumb_media"><% if !@thumbnail_list[i].nil? %><%= link_to image_tag(@thumbnail_list[i] ,:border=>'0', :title=>media.description, :alt => media.description),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%><% end %></div></h1><h2>Posted&nbsp;&nbsp;<%day_pos = media.created_at.strftime('%d')%><b><%=(media.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></b></h2><h3>Views&nbsp;&nbsp;<%=media.view_count%></h3>
+                      <h1><div class="thumb_media"><% if !@thumbnail_list[i].nil? %><%= link_to image_tag(@thumbnail_list[i] ,:width=>"50px",:height=>"50px",:border=>'0', :title=>media.description, :alt => media.description),:controller=>'medias',:action=>'show',:id=>media.encrypt_id -%><% end %></div></h1><h2>Posted&nbsp;&nbsp;<%day_pos = media.created_at.strftime('%d')%><b><%=(media.created_at).strftime("%b %d#{format_date(day_pos)}, %Y")%></b></h2><h3>Views&nbsp;&nbsp;<%=media.view_count%></h3>
                       <h3><% total_comment = total_comment_count(media.id)%>Comments&nbsp;<%=total_comment%></h3>
                     </div>                 
                  <% i = i+1 %>

@@ -21,9 +21,8 @@ class MediasController < ApplicationController
       flash[:rss_notice] = "There is problem access this page"
       redirect_to '/home'
     else
-     @tweets = twitter_follower_list(user_id)
-     @user_image,@user_desc = get_twitter_avatar_bio(user_id)
-    
+      @tweets = twitter_follower_list(user_id)
+      @user_image,@user_desc = get_twitter_avatar_bio(user_id)
       @user_name = get_user_name_by_id(user_id)      
       @medias = UploadFile.paginate :per_page => 5,:page => params[:page], :order => 'created_at DESC', :conditions=>"user_id=#{user_id}"
       @thumbnail = Array.new
@@ -73,17 +72,26 @@ end
         end
      end     
   end
-  
+
+  # Change Asset Name
+  def change_asset_name
+    encrypt_id = params[:encrypt_id]
+    new_media_name = params[:media][:media_name]
+    media_id = get_file_id_by_encrypt_id(encrypt_id)
+    @file = UploadFile.find(media_id)
+    @file.update_attributes(:media_name=>new_media_name)
+    redirect_to media_show_path(encrypt_id)
+  end
+
   # Media details method
   def show
       media_id = get_file_id_by_encrypt_id(params[:id])
-      if media_id == 0
+      if media_id == 0        
         # Error message display, If file is delete from DB and Drop.io
         @media_error = "Media no longer Exist"
       else
         begin
-          user_id = get_user_id_media_id(media_id)
-          @user_image,@user_desc = get_twitter_avatar_bio(user_id)
+          user_id = get_user_id_media_id(media_id)         
           @user_name = get_user_name_by_id(user_id)
           # find media with id in DB
           @media_details = UploadFile.find(media_id)
@@ -99,7 +107,7 @@ end
           @comment_list = @media_details.comments.paginate(:per_page=>5,:page => params[:page], :order => 'created_at DESC')
           @detail_page = true
           @share_url =  HOST+"/medias/show/"+params[:id]
-        rescue
+        rescue          
           # Error message display, If file is delete from DB and Drop.io
           @media_error = "Media no longer Exist"
         end
