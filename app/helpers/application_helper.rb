@@ -166,10 +166,11 @@ module ApplicationHelper
 
   # Create Hash for upload file details
   def upload_array(user_id,upload_array_details,content_type,upload_type)
+    media_name = upload_array_details.name
      hash_array = {:user_id=> user_id,
           :content_id=>content_type,
           :title=>upload_array_details.title,
-          :name=>upload_array_details.name,
+          :name=>media_name,
           :description=>upload_array_details.description,
           :created_at =>DateTime.now,
           :original_file_name=>upload_array_details.original_filename,
@@ -185,7 +186,7 @@ module ApplicationHelper
           :embed_code=>upload_array_details.embed_code,
           :upload_player_type=>upload_type,
           :encrypt_id=>newpass(user_id),
-          :name=>upload_array_details.name
+          :name=> media_name
          }
       return hash_array
   end 
