@@ -131,7 +131,7 @@ module ApplicationHelper
 
   # Create message for tweeter share
    def create_twitter_message(upload_file_id,description)
-     encrypt_id = get_encrypt_id_by_file_id(upload_file_id)
+    encrypt_id = get_encrypt_id_by_file_id(upload_file_id)
     # Create URL to share with twitter
     twit_url = "#{HOST}/medias/show/#{encrypt_id}"
     if description != ""
@@ -184,7 +184,8 @@ module ApplicationHelper
           :hidden_url=>upload_array_details.hidden_url,
           :embed_code=>upload_array_details.embed_code,
           :upload_player_type=>upload_type,
-          :encrypt_id=>newpass(user_id)
+          :encrypt_id=>newpass(user_id),
+          :name=>upload_array_details.name
          }
       return hash_array
   end 
